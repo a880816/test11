@@ -18,7 +18,7 @@ class ProductCategories extends Migration
             $table->bigIncrements('pid');
             // 商品名稱
             $table->string('productName', 100)->index();
-            //商品定價
+            //商品定價(使用台幣故不需decimal)
             $table->integer('productPrice')->index();
             // create_at/update_at
             $table->timestamps();

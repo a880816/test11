@@ -16,7 +16,7 @@ class Payments extends Migration
         Schema::create('payments', function (Blueprint $table) {
             // 訂單編號 primaryKey && autoId
             $table->bigIncrements('oid');
-            // 訂單價格
+            // 訂單價格(使用台幣故不需decimal)
             $table->integer('orderPrice');
             // 訂單狀態
             $table->string('orderStatus', 100);

@@ -14,10 +14,10 @@ class PaymentDetails extends Migration
     public function up()
     {
         Schema::create('payment_details', function (Blueprint $table) {
-            // 購買人id primaryKey
-            $table->bigInteger('uid')->primary();
-            // 訂單編號
-            $table->bigInteger('oid')->index();
+            // 訂單編號 primaryKey
+            $table->bigInteger('oid')->primary();
+            // 購買人id
+            $table->bigInteger('uid')->index();
             // 訂單細節
             $table->json('orderInfo')->index();
             // create_at/update_at
