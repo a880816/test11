@@ -9,7 +9,7 @@ class productCategory extends Model
 {
     //指定對應table name
     protected $table = 'product_categories';
-
+    protected $primaryKey = 'pid';
     
     use HasFactory;
 }

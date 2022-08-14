@@ -9,7 +9,7 @@ class paymentDetail extends Model
 {
     //指定對應table name
     protected $table = 'payment_details';
+    protected $primaryKey = 'uid';
 
-    
     use HasFactory;
 }

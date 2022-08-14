@@ -9,7 +9,7 @@ class user extends Model
 {
     //指定對應table name
     protected $table = 'users';
-    
-    
+    protected $primaryKey = 'uid';
+
     use HasFactory;
 }
