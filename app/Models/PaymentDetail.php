@@ -9,7 +9,15 @@ class paymentDetail extends Model
 {
     //指定對應table name
     protected $table = 'payment_details';
-    protected $primaryKey = 'uid';
+    protected $primaryKey = 'payment_id';
+
+
+    
+    public function payment() {
+        return $this->belongsTo('App\Models\Payment');
+    }
+
+    // protected $fillable = [];
 
     use HasFactory;
 }

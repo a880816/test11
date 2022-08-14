@@ -15,7 +15,7 @@ class ProductCategories extends Migration
     {
         Schema::create('product_categories', function (Blueprint $table) {
             // 商品id primaryKey && autoId
-            $table->bigIncrements('pid');
+            $table->bigIncrements('product_id');
             // 商品名稱
             $table->string('productName', 100)->index();
             //商品定價(使用台幣故不需decimal)

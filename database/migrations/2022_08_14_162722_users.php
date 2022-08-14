@@ -15,7 +15,7 @@ class Users extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             // 使用者id primaryKey & autoId
-            $table->bigIncrements('uid');
+            $table->bigIncrements('user_id');
             // 使用者姓名
             $table->string('username', 100)->index();
             // 連絡電話

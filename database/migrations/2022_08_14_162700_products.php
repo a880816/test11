@@ -15,7 +15,7 @@ class Products extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             // 商品id primaryKey
-            $table->bigInteger('pid')->primary();
+            $table->bigInteger('product_id')->primary();
             // 商品尺寸 1/2/3 對應 小中大
             $table->string('size', 50)->index();
             // 商品顏色

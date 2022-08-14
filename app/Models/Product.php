@@ -9,7 +9,13 @@ class product extends Model
 {
     //指定對應table name
     protected $table = 'products';
-    protected $primaryKey = 'pid';
+    protected $primaryKey = 'product_id';
     
+    public function productCategory() {
+        return $this->hasOne('App\Models\ProductCategory');
+    }
+
+    // protected $fillable = [];
+
     use HasFactory;
 }
