@@ -14,10 +14,14 @@ class paymentDetail extends Model
 
     
     public function payment() {
-        return $this->belongsTo('App\Models\Payment');
+        return $this->belongsTo(Payment::class);
     }
 
-    // protected $fillable = [];
+    protected $fillable = [
+        'payment_id',
+        'user_id',
+        'orderInfo'
+    ];
 
     use HasFactory;
 }

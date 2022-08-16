@@ -1,0 +1,12 @@
+[
+    {"product_id": "1", "amount": "2"},
+    {"product_id": "3", "amount": "5"},
+    {"product_id": "2", "amount": "3"},
+    {"product_id": "5", "amount": "2"},
+    {"product_id": "3", "amount": "5"},
+    {"product_id": "2", "amount": "3"},
+    {"product_id": "6", "amount": "26"},
+    {"product_id": "7", "amount": "11"},
+    {"product_id": "8", "amount": "7"},
+    {"product_id": "2", "amount": "3"}
+]

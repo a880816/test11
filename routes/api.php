@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/product', [ProductController::class, 'findAllProducts']);
+Route::get('/payment', [ProductController::class, 'findAllPayments']);
+Route::post('/payment', [ProductController::class, 'createPayment']);
+Route::get('/payment', [ProductController::class, 'findPaymentDetailByUser']);
+

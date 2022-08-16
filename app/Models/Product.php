@@ -12,10 +12,15 @@ class product extends Model
     protected $primaryKey = 'product_id';
     
     public function productCategory() {
-        return $this->hasOne('App\Models\ProductCategory');
+        return $this->hasOne(ProductCategory::class);
     }
 
-    // protected $fillable = [];
+    protected $fillable = [
+        'product_id',
+        'size',
+        'color',
+        'amount'
+    ];
 
     use HasFactory;
 }

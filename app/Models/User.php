@@ -11,9 +11,15 @@ class user extends Model
     protected $table = 'users';
     protected $primaryKey = 'user_id';
 
-    public function payment() {
-        return $this->hasMany('App\Models\Payment');
+    public function payments() {
+        return $this->hasMany(Payment::class);
     }
+
+    protected $fillable = [
+        'username',
+        'phone'
+    ];
+
 
     use HasFactory;
 }
