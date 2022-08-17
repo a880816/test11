@@ -3,65 +3,67 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Models\products;
+use App\Models\payment;
+use App\Models\paymentDetail;
+use App\Models\product;
+use App\Models\user;
 use Illuminate\Http\Request;
+use PaymentDetails;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return response()->json(products::select('pid', 'name', 'account')->get());
+    public function findAllProducts() {
 
-
+        return response()->json(product::all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function findAllPayments() {
+    
+        return response()->json(payment::all());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function createPayment($paymentVo) {
+        $userName = $paymentVo['userName'];
+
+        $user = user::select('user_id', 'userName', 'phone')->where('user_id', $paymentVo['user_id'])->first();
+
+        if (!isset($user) && !empty($user)) {
+            $newPayment = new Payment;
+            $newPayment->orderPrice = $paymentVo['orderPrice'];
+            $newPayment->orderStatus = $paymentVo['orderStatus'];
+            $newPayment->save();
+
+            $input['orderInfo']= json_encode($paymentVo['orderInfo']);
+
+            $newPaymentDetail = new PaymentDetail;
+            $newPaymentDetail->payment_id = $newPayment['payment_id'];
+            $newPaymentDetail->user_id = $paymentVo['user_id'];
+            $newPaymentDetail->orderInfo = $paymentVo['orderInfo'];
+            $newPaymentDetail->save();
+            echo '{$userName}的一筆訂單已建立';
+        } else {
+            echo '查無此使用者：{$paymentVo["userName"]}';
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    public function findPaymentDetail($payment_id, $user_id) {
+        $paymentDetail = paymentDetail::leftJoin('payments', 'payments.payment_id', '=', 'paymentDetails.payment_id')
+                                        ->select(
+                                                'paymentDetails.payment_id',
+                                                'paymentDetails.user_id',
+                                                'paymentDetails.orderInfo',
+                                                'payments.orderPrice',
+                                                'payments.orderStatus',
+                                                'payments.create_at'
+                                                )
+                                        ->where('payment_id', $payment_id)
+                                        ->first();
+        if (strcmp($paymentDetail['user_id'], $user_id)) {
+            return response()->json($paymentDetail);
+        } else {
+            $user = user::select('user_id', 'userName', 'phone')->where('user_id', $user_id)->first();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            echo '使用者：{$user["userName"]} 無此訂單查詢權限';
+        }
     }
 }

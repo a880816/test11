@@ -16,7 +16,7 @@ class user extends Model
     }
 
     protected $fillable = [
-        'username',
+        'userName',
         'phone'
     ];
 
